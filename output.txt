@@ -1,0 +1,216 @@
+Starting Project 1 with L=12000, H=20, PN=7, branch=2
+Process 6547 starting level 0, waiting for children...
+Process 6550 starting level 1, waiting for children...
+Process 6551 starting level 1, waiting for children...
+Process 6552 starting level 2, waiting for children...
+Process 6555 starting level 2, waiting for children...
+ECE 434 Sp26: I'm process 6556 with return arg 1111 and my parent is 6552.
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[9].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[47].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[140].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[159].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[392].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[525].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[605].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[700].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[787].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[820].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[898].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[902].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[951].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[1000].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[1071].
+ECE 434 Sp26: I am process 6556 with return arg 1111. I found the hidden key in position A[1330].
+ECE 434 Sp26: I'm process 6557 with return arg 1112 and my parent is 6552.
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1586].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1608].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1612].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1796].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1803].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1833].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1909].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[1920].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2112].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2238].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2315].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2339].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2370].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2479].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2496].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2539].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2569].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2656].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2847].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2932].
+ECE 434 Sp26: I am process 6557 with return arg 1112. I found the hidden key in position A[2993].
+ECE 434 Sp26: I'm process 6558 with return arg 1221 and my parent is 6555.
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9042].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9100].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9140].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9245].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9328].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9366].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9406].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9480].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9494].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9510].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9536].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9655].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9660].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9691].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9777].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9814].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9823].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9954].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[9965].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10022].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10176].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10211].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10259].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10399].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10409].
+ECE 434 Sp26: I am process 6558 with return arg 1221. I found the hidden key in position A[10448].
+Process 6553 starting level 2, waiting for children...
+ECE 434 Sp26: I'm process 6559 with return arg 1222 and my parent is 6555.
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10618].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10725].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10757].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10770].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10789].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[10980].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11011].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11086].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11164].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11184].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11276].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11467].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11476].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11504].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11520].
+ECE 434 Sp26: I am process 6559 with return arg 1222. I found the hidden key in position A[11653].
+Process 6554 starting level 2, waiting for children...
+ECE 434 Sp26: I'm process 6561 with return arg 1121 and my parent is 6554.
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3119].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3211].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3229].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3343].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3464].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3521].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3817].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[3956].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4055].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4081].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4160].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4252].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4343].
+ECE 434 Sp26: I am process 6561 with return arg 1121. I found the hidden key in position A[4357].
+ECE 434 Sp26: I'm process 6563 with return arg 1212 and my parent is 6553.
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7545].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7579].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7673].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7735].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7906].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7960].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[7971].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8032].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8087].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8165].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8214].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8268].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8280].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8329].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8384].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8460].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8558].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8628].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8678].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8775].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8896].
+ECE 434 Sp26: I am process 6563 with return arg 1212. I found the hidden key in position A[8915].
+ECE 434 Sp26: I'm process 6562 with return arg 1122 and my parent is 6554.
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4521].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4553].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4681].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4715].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4743].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4765].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4825].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[4912].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5013].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5150].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5398].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5453].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5568].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5581].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5682].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5707].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5736].
+ECE 434 Sp26: I am process 6562 with return arg 1122. I found the hidden key in position A[5880].
+ECE 434 Sp26: I'm process 6560 with return arg 1211 and my parent is 6553.
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6037].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6050].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6066].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6127].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6282].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6411].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6431].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6490].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6619].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6628].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6735].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6800].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[6946].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[7030].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[7235].
+ECE 434 Sp26: I am process 6560 with return arg 1211. I found the hidden key in position A[7402].
+Child with PID=6556 terminated normally, exit status=112
+Child with PID=6557 terminated normally, exit status=113
+Process 6552 finishing level 2.
+Child with PID=6558 terminated normally, exit status=222
+Child with PID=6559 terminated normally, exit status=223
+Process 6555 finishing level 2.
+Child with PID=6560 terminated normally, exit status=212
+Child with PID=6563 terminated normally, exit status=213
+Process 6553 finishing level 2.
+Child with PID=6561 terminated normally, exit status=122
+Child with PID=6562 terminated normally, exit status=123
+Process 6554 finishing level 2.
+Child with PID=6552 terminated normally, exit status=112
+Child with PID=6554 terminated normally, exit status=113
+Process 6550 finishing level 1.
+Child with PID=6553 terminated normally, exit status=122
+Child with PID=6555 terminated normally, exit status=123
+Process 6551 finishing level 1.
+Child with PID=6550 terminated normally, exit status=12
+Child with PID=6551 terminated normally, exit status=13
+Process 6547 finishing level 0.
+
+FINAL RESULTS:
+Max=1000, Avg=496.52
+Printing up to H=20 hidden key locations requested:
+Hidden key found at A[9]
+Hidden key found at A[47]
+Hidden key found at A[140]
+Hidden key found at A[159]
+Hidden key found at A[392]
+Hidden key found at A[525]
+Hidden key found at A[605]
+Hidden key found at A[700]
+Hidden key found at A[787]
+Hidden key found at A[820]
+Hidden key found at A[898]
+Hidden key found at A[902]
+Hidden key found at A[951]
+Hidden key found at A[1000]
+Hidden key found at A[1071]
+Hidden key found at A[1330]
+Hidden key found at A[1586]
+Hidden key found at A[1608]
+Hidden key found at A[1612]
+Hidden key found at A[1796]
+
+ROOT SUMMARY:
+Total runtime = 3.005376 sec
+Slowest child/process PID = 6547
+Slowest observed time = 3.005269 sec
+Total IPC volume = 15008 bytes

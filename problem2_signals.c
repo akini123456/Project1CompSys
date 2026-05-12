@@ -311,17 +311,17 @@ static void configure_child_part1(int child_index) {
     printf("Child index=%d pid=%ld configured signal policy\n", child_index, (long)getpid());
     print_signal_list("  catches:", caught[child_index], 4);
     print_signal_list("  blocked for full execution:", always_blocked[child_index], 2);
-    printf("  other listed signals are ignored. Two caught signals are also masked during handlers.\n");
 }
 
 static long long compute_sum_with_sleep(int child_index) {
-    pid_t pid = getpid();
-    long long limit = (long long)pid * 10LL;
+    pid_t real_pid = getpid();
+    int logical_pid = child_index + 1;
+    long long limit = (long long)logical_pid * 10LL;
     long long sum = 0;
     unsigned int per_iteration_sleep = g_fast ? 0U : 10U;
 
-    printf("child=%d pid=%ld sum 0..%lld sleep=%u\n",
-           child_index, (long)pid, limit, per_iteration_sleep);
+    printf("child=%d real_pid=%ld logical_pid=%d sum 0..%lld sleep=%u\n",
+           child_index, (long)real_pid, logical_pid, limit, per_iteration_sleep);
 
     if (g_fast) {
         sleep(1);
@@ -338,7 +338,8 @@ static long long compute_sum_with_sleep(int child_index) {
         sleep(1);
     }
 
-    printf("child=%d pid=%ld sum=%lld\n", child_index, (long)pid, sum);
+    printf("child=%d real_pid=%ld logical_pid=%d sum=%lld\n",
+           child_index, (long)real_pid, logical_pid, sum);
     return sum;
 }
 
@@ -536,7 +537,7 @@ static void run_q3(void) {
 
 static void usage(const char *prog) {
     printf("Usage: %s <part1|q2|q3> [fast]\n", prog);
-    printf("  part1 default uses 10 seconds per sum iteration as assigned; use fast for test output.\n");
+    printf("  part1 uses logical_pid=child_index+1 and sleeps 10 seconds per iteration unless fast is used.\n");
 }
 
 int main(int argc, char *argv[]) {

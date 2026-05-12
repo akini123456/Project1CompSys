@@ -2,6 +2,8 @@
 *.aux
 *.log
 *.out
+a.out
+core
 
 project1
 problem1_signals

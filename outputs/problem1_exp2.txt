@@ -1,57 +1,57 @@
 Problem1 Experiment 2: SIGINT ignored L=12000 H=20 PN=4 branch=3 fast=1
-root pid=1295249, pstree -p 1295249
-proc=1295249 level=0 children=3
-compute pid=1295250 ppid=1295249 arg=11 range=[0,4000)
-metrics pid=1295250 hidden=12 count=4000
-child=1295250 arg=11 hidden=12 raise SIGTSTP
-compute pid=1295251 ppid=1295249 arg=12 range=[4000,8000)
-parent=1295249 got child=1295250 arg=11 hidden=12
-metrics pid=1295251 hidden=30 count=4000
-compute pid=1295252 ppid=1295249 arg=13 range=[8000,12000)
-metrics pid=1295252 hidden=108 count=4000
-child=1295251 arg=12 hidden=30 raise SIGTSTP
-parent=1295249 got child=1295251 arg=12 hidden=30
-child=1295252 arg=13 hidden=108 raise SIGTSTP
-parent=1295249 got child=1295252 arg=13 hidden=108
-parent=1295249 siblings: child=1295250 hidden=12 child=1295251 hidden=30 child=1295252 hidden=108
-parent=1295249 merge lowest child=1295250 hidden=12
-[waitpid] pid=1295250 raw_status=5247 WIFSTOPPED yes, WSTOPSIG=20 (SIGTSTP)
-[waitpid] pid=1295251 raw_status=5247 WIFSTOPPED yes, WSTOPSIG=20 (SIGTSTP)
-[waitpid] pid=1295252 raw_status=5247 WIFSTOPPED yes, WSTOPSIG=20 (SIGTSTP)
-rule=3 parent=1295249 child=1295250 hidden=12
-parent=1295249 child=1295250 send SIGUSR2 rule=3
-RULE 3 parent=1295249 child=1295250 send SIGCONT
-handler sig=12(SIGUSR2) pid=1295250 ppid=1295249 sender=1295249 rule=3
-child=1295250 raise SIGSTOP fallback
-child=1295250 continued secret=0 rule3=1
-rule=3 child=1295250 sleep=6
-rule=3 parent=1295249 child=1295250 send SIGINT
-rule=3 parent=1295249 child=1295250 send SIGQUIT
-rule=2 parent=1295249 child=1295251 hidden=30
-parent=1295249 child=1295251 send SIGUSR1 secret=15(SIGTERM)
-RULE 2 parent=1295249 child=1295251 send SIGCONT
-handler sig=10(SIGUSR1) pid=1295251 ppid=1295249 sender=1295249 secret=15(SIGTERM)
-child=1295251 raise SIGSTOP fallback
-rule=1 parent=1295249 child=1295252 hidden=108
-RULE 1 parent=1295249 child=1295252 send SIGCONT
-child=1295251 continued secret=1 rule3=0
-rule=2 child=1295251 secret=15(SIGTERM)
-child=1295252 raise SIGSTOP fallback
-rule=2 child=1295251 helper=1295291 orphan test
-orphan helper pid=1295291 ppid=1295251 start
-[waitpid] pid=1295250 raw_status=131 WIFSIGNALED yes, WTERMSIG=3 (SIGQUIT)
-[waitpid] pid=1295251 raw_status=65535 WIFCONTINUED yes
-rule=2 child=1295251 raise secret
-secret handler pid=1295251 sig=15(SIGTERM)
-rule=2 child=1295251 default SIGTERM and raise again
-[waitpid] pid=1295251 raw_status=15 WIFSIGNALED yes, WTERMSIG=15 (SIGTERM)
-[waitpid] pid=1295252 raw_status=65535 WIFCONTINUED yes
-child=1295252 continued secret=0 rule3=0
-rule=1 child=1295252 sleep then exit(14)
-orphan helper pid=1295291 ppid=1 after parent exit
-rule=1 child=1295252 exit=14
-[waitpid] pid=1295252 raw_status=3584 WIFEXITED yes, WEXITSTATUS=14
-proc=1295249 done level=0 hidden=12
+root pid=10, pstree -p 10
+proc=10 level=0 children=3
+compute pid=11 ppid=10 arg=11 range=[0,4000)
+metrics pid=11 hidden=12 count=4000
+child=11 arg=11 hidden=12 raise SIGTSTP
+child=11 raise SIGSTOP fallback
+compute pid=12 ppid=10 arg=12 range=[4000,8000)
+parent=10 got child=11 arg=11 hidden=12
+metrics pid=12 hidden=30 count=4000
+compute pid=13 ppid=10 arg=13 range=[8000,12000)
+metrics pid=13 hidden=108 count=4000
+child=12 arg=12 hidden=30 raise SIGTSTP
+child=12 raise SIGSTOP fallback
+parent=10 got child=12 arg=12 hidden=30
+child=13 arg=13 hidden=108 raise SIGTSTP
+child=13 raise SIGSTOP fallback
+parent=10 got child=13 arg=13 hidden=108
+parent=10 siblings: child=11 hidden=12 child=12 hidden=30 child=13 hidden=108
+parent=10 merge lowest child=11 hidden=12
+[waitpid] pid=11 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+[waitpid] pid=12 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+[waitpid] pid=13 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+rule=3 parent=10 child=11 hidden=12
+parent=10 child=11 send SIGUSR2 rule=3
+RULE 3 parent=10 child=11 send SIGCONT
+handler sig=12(SIGUSR2) pid=11 ppid=10 sender=10 rule=3
+child=11 continued secret=0 rule3=1
+rule=3 child=11 sleep=6
+rule=3 parent=10 child=11 send SIGINT
+rule=3 parent=10 child=11 send SIGQUIT
+rule=2 parent=10 child=12 hidden=30
+parent=10 child=12 send SIGUSR1 secret=15(SIGTERM)
+RULE 2 parent=10 child=12 send SIGCONT
+handler sig=10(SIGUSR1) pid=12 ppid=10 sender=10 secret=15(SIGTERM)
+child=12 continued secret=1 rule3=0
+rule=2 child=12 secret=15(SIGTERM)
+rule=2 child=12 helper=14 orphan test
+orphan helper pid=14 ppid=12 start
+rule=1 parent=10 child=13 hidden=108
+RULE 1 parent=10 child=13 send SIGCONT
+[waitpid] pid=11 raw_status=131 WIFSIGNALED yes, WTERMSIG=3 (SIGQUIT)
+[waitpid] pid=12 raw_status=65535 WIFCONTINUED yes
+rule=2 child=12 raise secret
+secret handler pid=12 sig=15(SIGTERM)
+rule=2 child=12 default SIGTERM and raise again
+[waitpid] pid=12 raw_status=15 WIFSIGNALED yes, WTERMSIG=15 (SIGTERM)
+[waitpid] pid=13 raw_status=65535 WIFCONTINUED yes
+child=13 continued secret=0 rule3=0
+rule=1 child=13 sleep then exit(14)
+orphan helper pid=14 ppid=1 after parent exit
+rule=1 child=13 exit=14
+[waitpid] pid=13 raw_status=3584 WIFEXITED yes, WEXITSTATUS=14
+proc=10 done level=0 hidden=12
 
 FINAL RESULTS:
 Max=1000, Avg=493.52
@@ -71,7 +71,7 @@ A[3618]
 A[3809]
 
 ROOT SUMMARY:
-Total runtime = 11.169028 sec
-Slowest child/process PID = 1295249
-Slowest observed time = 11.168961 sec
+Total runtime = 11.108466 sec
+Slowest child/process PID = 10
+Slowest observed time = 11.108406 sec
 Total IPC volume = 3216 bytes

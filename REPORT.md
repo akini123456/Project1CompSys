@@ -95,7 +95,15 @@ In Experiment 2, `SIGINT` was ignored. There was no SIGINT handler output. The c
 ./problem2_signals q3
 ```
 
-The Makefile run targets use `fast` mode for output generation. In normal `part1`, the child loop uses the assignment's 10-second sleep per iteration. In fast mode, it computes the same sum without the long per-iteration delay.
+The Makefile run targets use `fast` mode for output generation. In normal `part1`, the child loop still uses the assignment's 10-second sleep per iteration, but it uses a bounded logical PID instead of the real Linux PID. The logical PID is `child_index + 1`, so the loop computes the sum from 0 to `10 * logical_pid`. This keeps the program runnable because real system PIDs can be very large.
+
+Example sum line:
+
+```text
+child=0 real_pid=12345 logical_pid=1 sum 0..10 sleep=10
+```
+
+In fast mode, the program computes the same sum without the long per-iteration delay.
 
 Part 1 forks four child processes. The parent initially ignores the eight listed signals while forking:
 
@@ -209,6 +217,22 @@ outputs/problem2_part1.txt
 outputs/problem2_q2.txt
 outputs/problem2_q3.txt
 ```
+
+## Testing
+
+I tested the project with:
+
+```text
+make clean && make
+make run-problem1
+make run-problem1-exp1
+make run-problem1-exp2
+make run-problem2-part1
+make run-problem2-q2
+make run-problem2-q3
+```
+
+The run targets generated output files in `outputs/`. I checked that the output includes the expected `waitpid()` status lines, signal handler lines, pending queue lines, and rule labels. The direct children are waited for, so no intended child processes should remain as zombies after completion.
 
 ## Known Limitations
 

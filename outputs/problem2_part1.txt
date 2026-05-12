@@ -1,39 +1,36 @@
-Problem 2 part1 parent pid=1295329 initially ignores all eight listed signals while forking children.
-Child index=0 pid=1295330 configured signal policy
+Problem 2 part1 parent pid=10 initially ignores all eight listed signals while forking children.
+Child index=0 pid=11 configured signal policy
   catches: SIGINT SIGABRT SIGILL SIGCHLD
   blocked for full execution: SIGSEGV SIGFPE
-  other listed signals are ignored. Two caught signals are also masked during handlers.
-child=0 pid=1295330 sum 0..12953300 sleep=0
-Child index=1 pid=1295331 configured signal policy
+child=0 real_pid=11 logical_pid=1 sum 0..10 sleep=0
+Child index=1 pid=12 configured signal policy
   catches: SIGSEGV SIGFPE SIGHUP SIGTSTP
   blocked for full execution: SIGINT SIGABRT
-  other listed signals are ignored. Two caught signals are also masked during handlers.
-child=1 pid=1295331 sum 0..12953310 sleep=0
-Child index=2 pid=1295332 configured signal policy
-Parent pid=1295329 finished forking; now catches the listed signals while children run.
+child=1 real_pid=12 logical_pid=2 sum 0..20 sleep=0
+Child index=2 pid=13 configured signal policy
+Parent pid=10 finished forking; now catches the listed signals while children run.
   catches: SIGINT SIGSEGV SIGHUP SIGILL
   blocked for full execution: SIGABRT SIGTSTP
-  other listed signals are ignored. Two caught signals are also masked during handlers.
-child=2 pid=1295332 sum 0..12953320 sleep=0
-Child index=3 pid=1295333 configured signal policy
+child=2 real_pid=13 logical_pid=3 sum 0..30 sleep=0
+Child index=3 pid=14 configured signal policy
   catches: SIGABRT SIGFPE SIGCHLD SIGTSTP
   blocked for full execution: SIGINT SIGHUP
-  other listed signals are ignored. Two caught signals are also masked during handlers.
-child=3 pid=1295333 sum 0..12953330 sleep=0
-child=1 pid=1295331 sum=83894126454705
-child=0 pid=1295330 sum=83893996921650
-Child part1 before exit pid=1295331 pending:
-Child part1 before exit pid=1295330 pending:
-child=3 pid=1295333 sum=83894385521115
-Child part1 before exit pid=1295333 pending:
-[handler] signal=17 (SIGCHLD), recipient pid=1295329, parent pid=1295328, sender pid=1295331
-Parent pid=1295329 reaped child pid=1295330 WIFEXITED status=20
-Parent pid=1295329 reaped child pid=1295331 WIFEXITED status=21
-Parent pid=1295329 reaped child pid=1295333 WIFEXITED status=23
-child=2 pid=1295332 sum=83894255987860
-Child part1 before exit pid=1295332 pending:
-[handler] signal=17 (SIGCHLD), recipient pid=1295329, parent pid=1295328, sender pid=1295332
-Parent pid=1295329 reaped child pid=1295332 WIFEXITED status=22
-Parent pid=1295329 restoring default handlers for the eight listed signals.
-Parent pid=1295329 sleeping after restoring defaults for 2 second(s)
+child=3 real_pid=14 logical_pid=4 sum 0..40 sleep=0
+child=0 real_pid=11 logical_pid=1 sum=55
+Child part1 before exit pid=11 pending:
+child=1 real_pid=12 logical_pid=2 sum=210
+Child part1 before exit pid=12 pending:
+child=2 real_pid=13 logical_pid=3 sum=465
+Child part1 before exit pid=13 pending:
+[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=11
+child=3 real_pid=14 logical_pid=4 sum=820
+Parent pid=10 reaped child pid=11 WIFEXITED status=20
+Child part1 before exit pid=14 pending:
+[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=13
+Parent pid=10 reaped child pid=12 WIFEXITED status=21
+Parent pid=10 reaped child pid=13 WIFEXITED status=22
+[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=14
+Parent pid=10 reaped child pid=14 WIFEXITED status=23
+Parent pid=10 restoring default handlers for the eight listed signals.
+Parent pid=10 sleeping after restoring defaults for 2 second(s)
 Problem 2 part1 parent completed.

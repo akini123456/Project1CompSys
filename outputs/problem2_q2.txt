@@ -1,56 +1,53 @@
-Child index=0 pid=11 configured signal policy
+Child index=0 pid=1295375 configured signal policy
   catches: SIGINT SIGABRT SIGILL SIGCHLD
   blocked for full execution: SIGSEGV SIGFPE
   other listed signals are ignored. Two caught signals are also masked during handlers.
-Child index=1 pid=12 configured signal policy
+Child index=1 pid=1295376 configured signal policy
   catches: SIGSEGV SIGFPE SIGHUP SIGTSTP
   blocked for full execution: SIGINT SIGABRT
   other listed signals are ignored. Two caught signals are also masked during handlers.
-Q2 receiver child index=1 pid=12 staying alive so another child can signal it.
-Child index=2 pid=13 configured signal policy
-Q2 sender child pid=11 will send every listed signal 2 time(s) to child pid=12 and parent pid=10
+Q2 receiver child index=1 pid=1295376 staying alive so another child can signal it.
+Child index=2 pid=1295377 configured signal policy
+Q2 sender child pid=1295375 will send every listed signal 2 time(s) to child pid=1295376 and parent pid=1295374
+Q2 parent pid=1295374 waiting while child pid=1295375 signals child pid=1295376 and the parent twice per signal.
   catches: SIGINT SIGSEGV SIGHUP SIGILL
-Q2 parent pid=10 waiting while child pid=11 signals child pid=12 and the parent twice per signal.
   blocked for full execution: SIGABRT SIGTSTP
   other listed signals are ignored. Two caught signals are also masked during handlers.
-Q2 receiver child index=2 pid=13 staying alive so another child can signal it.
-Child index=3 pid=14 configured signal policy
+Q2 receiver child index=2 pid=1295377 staying alive so another child can signal it.
+Child index=3 pid=1295378 configured signal policy
   catches: SIGABRT SIGFPE SIGCHLD SIGTSTP
   blocked for full execution: SIGINT SIGHUP
   other listed signals are ignored. Two caught signals are also masked during handlers.
-Q2 receiver child index=3 pid=14 staying alive so another child can signal it.
-child=0 pid=11 sum 0..110 sleep=0
-[handler] signal=11 (SIGSEGV), recipient pid=12, parent pid=10, sender pid=11
-[handler] signal=20 (SIGTSTP), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=8 (SIGFPE), recipient pid=12, parent pid=10, sender pid=11
-[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=1 (SIGHUP), recipient pid=12, parent pid=10, sender pid=11
-[handler] signal=6 (SIGABRT), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=20 (SIGTSTP), recipient pid=12, parent pid=10, sender pid=11
-[handler] signal=2 (SIGINT), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=1 (SIGHUP), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=1 (SIGHUP), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=11 (SIGSEGV), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=8 (SIGFPE), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=8 (SIGFPE), recipient pid=10, parent pid=9, sender pid=11
-[handler] signal=4 (SIGILL), recipient pid=10, parent pid=9, sender pid=11
-child=0 pid=11 sum=6105
-Q2 sender child before exit pid=11 pending:
-[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=11
-Parent pid=10 reaped child pid=11 WIFEXITED status=40
-child=2 pid=13 sum 0..130 sleep=0
-child=3 pid=14 sum 0..140 sleep=0
-child=1 pid=12 sum 0..120 sleep=0
-child=2 pid=13 sum=8515
-Q2 receiver child before exit pid=13 pending:
-child=3 pid=14 sum=9870
-Q2 receiver child before exit pid=14 pending:
-child=1 pid=12 sum=7260
-Q2 receiver child before exit pid=12 pending: SIGINT SIGABRT
-[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=13
-[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=14
-Parent pid=10 reaped child pid=13 WIFEXITED status=42
-Parent pid=10 reaped child pid=14 WIFEXITED status=43
-[handler] signal=17 (SIGCHLD), recipient pid=10, parent pid=9, sender pid=12
-Parent pid=10 reaped child pid=12 WIFEXITED status=41
-Q2 parent pending after waits pid=10 pending:
+Q2 receiver child index=3 pid=1295378 staying alive so another child can signal it.
+child=0 pid=1295375 sum 0..12953750 sleep=0
+[handler] signal=11 (SIGSEGV), recipient pid=1295376, parent pid=1295374, sender pid=1295375
+[handler] signal=8 (SIGFPE), recipient pid=1295376, parent pid=1295374, sender pid=1295375
+[handler] signal=1 (SIGHUP), recipient pid=1295376, parent pid=1295374, sender pid=1295375
+[handler] signal=20 (SIGTSTP), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=20 (SIGTSTP), recipient pid=1295376, parent pid=1295374, sender pid=1295375
+[handler] signal=17 (SIGCHLD), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=6 (SIGABRT), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=2 (SIGINT), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=1 (SIGHUP), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=11 (SIGSEGV), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=8 (SIGFPE), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+[handler] signal=4 (SIGILL), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+child=0 pid=1295375 sum=83899826008125
+Q2 sender child before exit pid=1295375 pending:
+[handler] signal=17 (SIGCHLD), recipient pid=1295374, parent pid=1295373, sender pid=1295375
+Parent pid=1295374 reaped child pid=1295375 WIFEXITED status=40
+child=2 pid=1295377 sum 0..12953770 sleep=0
+child=1 pid=1295376 sum 0..12953760 sleep=0
+child=3 pid=1295378 sum 0..12953780 sleep=0
+child=3 pid=1295378 sum=83900214621090
+Q2 receiver child before exit pid=1295378 pending:
+child=1 pid=1295376 sum=83899955545680
+child=2 pid=1295377 sum=83900085083335
+Q2 receiver child before exit pid=1295376 pending: SIGINT SIGABRT
+Q2 receiver child before exit pid=1295377 pending:
+[handler] signal=17 (SIGCHLD), recipient pid=1295374, parent pid=1295373, sender pid=1295378
+Parent pid=1295374 reaped child pid=1295378 WIFEXITED status=43
+[handler] signal=17 (SIGCHLD), recipient pid=1295374, parent pid=1295373, sender pid=1295377
+Parent pid=1295374 reaped child pid=1295376 WIFEXITED status=41
+Parent pid=1295374 reaped child pid=1295377 WIFEXITED status=42
+Q2 parent pending after waits pid=1295374 pending:

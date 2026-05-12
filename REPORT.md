@@ -1,16 +1,8 @@
-# Rutgers ECE 434/579 Project 2 Report
+# Rutgers ECE 434 Project 2 Report
 
-Names:
+Names: Samarth Sathishkanth (ss4714), Doug Lavin(dml336), Daniel Kang (dk1203), Aryan Kini (apk84)
 
-Emails:
-
-Group number:
-
-Contribution table:
-
-| Member | Contribution |
-| --- | --- |
-| TBD | TBD |
+Group number: 25
 
 ## Project 1 Code Structure
 

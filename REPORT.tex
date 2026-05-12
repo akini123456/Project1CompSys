@@ -1,0 +1,351 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\sloppy
+
+\title{Rutgers ECE 434/579 Project 2 Report}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Names:}
+
+\textbf{Emails:}
+
+\textbf{Group number:}
+
+\textbf{Contribution table:}
+
+\begin{tabular}{|p{1.6in}|p{4.2in}|}
+\hline
+\textbf{Member} & \textbf{Contribution} \\
+\hline
+TBD & TBD \\
+\hline
+\end{tabular}
+
+\section{Project 1 Code Structure}
+
+The original Project 1 program is still in \texttt{project1.c}. It builds a recursive
+process tree with \texttt{fork()}. Each process owns a slice of the generated input
+array. If the slice is still large and the process limit allows more processes, it
+splits the slice into \texttt{branch} children.
+
+Hidden nodes are represented as negative integers in the array. \texttt{compute\_local()}
+treats every negative value as a hidden key and stores its index in
+\texttt{Result.hidden\_pos[]}. The number of hidden nodes found is
+\texttt{Result.hidden\_found}.
+
+Child-to-parent communication already used pipes. Each child writes one binary
+\texttt{Result} struct to its parent. The parent uses \texttt{poll()} to wait for child
+pipe data, reads each \texttt{Result}, merges metrics, then uses \texttt{waitpid()} to
+analyze child termination.
+
+\section{Problem 1 Design}
+
+I kept \texttt{project1.c} as the Project 1 baseline and wrote the Project 2 signal
+version in \texttt{problem1\_signals.c}. The new program keeps the same basic design:
+generated input array, recursive segment processing, one pipe per child, and
+\texttt{waitpid()} in every parent.
+
+For the Project 2 run target I used:
+
+\begin{verbatim}
+./problem1_signals exp1 fast
+./problem1_signals exp2 fast
+\end{verbatim}
+
+Fast mode keeps the same behavior but shortens sleeps so the output files can be
+generated. The default mode uses the longer assignment-style sleeps: Rule 1 sleeps
+100 seconds, Rule 3 parent waits 10 seconds, and Rule 3 child sleeps 30 seconds.
+
+After a child computes its metrics, it writes its \texttt{Result} through the pipe and
+then calls \texttt{raise(SIGTSTP)}. In the redirected \texttt{make} environment,
+\texttt{SIGTSTP} can be discarded because the process group is not an interactive
+job-control process group. To make the test run observable, the child then raises
+\texttt{SIGSTOP} as a compatibility stop. The required \texttt{SIGTSTP} call is still
+present, and the parent resumes children with \texttt{SIGCONT}.
+
+The parent reads all sibling hidden counts first. In the generated test case the
+three direct children had:
+
+\begin{verbatim}
+parent=10 siblings:
+  child=11 hidden=12 child=12 hidden=30 child=13 hidden=108
+\end{verbatim}
+
+The parent updates its own hidden-node list using only the child with the fewest
+hidden nodes. This is why the final propagated hidden-node count is 12 even though
+all children found more hidden nodes in total.
+
+\section{Problem 1 Observations}
+
+The stopped children were detected with \texttt{waitpid()} using
+\texttt{WUNTRACED} and \texttt{WNOHANG}:
+
+\begin{verbatim}
+[waitpid] pid=11 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+[waitpid] pid=12 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+[waitpid] pid=13 raw_status=4991 WIFSTOPPED yes, WSTOPSIG=19 (SIGSTOP)
+\end{verbatim}
+
+Rule 1 was applied to the highest hidden-node child:
+
+\begin{verbatim}
+rule=1 parent=10 child=13 hidden=108
+rule=1 child=13 exit=14
+[waitpid] pid=13 raw_status=3584 WIFEXITED yes, WEXITSTATUS=14
+\end{verbatim}
+
+The return value from \texttt{waitpid()} was the child PID. The status value was
+decoded with \texttt{WIFEXITED} and \texttt{WEXITSTATUS}. This child exited normally
+with its unique exit argument.
+
+Rule 2 was applied to the middle child. The parent sent \texttt{SIGUSR1} using
+\texttt{sigqueue()} and passed secret signal number \texttt{SIGTERM}. The child handled
+the secret signal, restored the default action, then raised it again so termination
+showed as signal termination:
+
+\begin{verbatim}
+rule=2 parent=10 child=12 hidden=30
+handler sig=10(SIGUSR1) pid=12 ppid=10 sender=10 secret=15(SIGTERM)
+secret handler pid=12 sig=15(SIGTERM)
+[waitpid] pid=12 raw_status=15 WIFSIGNALED yes, WTERMSIG=15 (SIGTERM)
+\end{verbatim}
+
+Here \texttt{waitpid()} again returned the child PID, but the status was decoded with
+\texttt{WIFSIGNALED} and \texttt{WTERMSIG}. The terminating signal was
+\texttt{SIGTERM}.
+
+To observe what happens to offspring, the Rule 2 child forks a helper child and then
+terminates without waiting for it. The helper output showed adoption by PID 1:
+
+\begin{verbatim}
+orphan helper pid=14 ppid=12 start
+orphan helper pid=14 ppid=1 after parent exit
+\end{verbatim}
+
+The child process's offspring are not automatically killed just because their
+parent dies. They become orphans and are adopted by init/systemd. Direct children
+are still waited for by their own parent, so the main program does not leave zombies.
+
+Rule 3 was applied to the lowest hidden-node child. In Experiment 1, \texttt{SIGINT}
+had a handler that printed and returned:
+
+\begin{verbatim}
+rule=3 parent=10 child=11 hidden=12
+SIGINT handler sig=2(SIGINT) child=11 ppid=10 sender=10
+rule=3 child=11 sleep_left=3 sigint_count=1
+rule=3 child=11 wait SIGQUIT
+[waitpid] pid=11 raw_status=131 WIFSIGNALED yes, WTERMSIG=3 (SIGQUIT)
+\end{verbatim}
+
+This shows that when a caught signal interrupts \texttt{sleep()}, \texttt{sleep()}
+returns early with remaining time, and the child moves to the next instruction after
+the handler returns.
+
+In Experiment 2, \texttt{SIGINT} was ignored. There was no \texttt{SIGINT} handler
+output. The child stayed in sleep until the parent sent \texttt{SIGQUIT}, and
+\texttt{waitpid()} reported signal termination by \texttt{SIGQUIT}.
+
+\section{Problem 2 Design}
+
+\texttt{problem2\_signals.c} has three modes:
+
+\begin{verbatim}
+./problem2_signals part1
+./problem2_signals q2
+./problem2_signals q3
+\end{verbatim}
+
+The Makefile run targets use \texttt{fast} mode for output generation. In normal
+\texttt{part1}, the child loop uses the assignment's 10-second sleep per iteration.
+In fast mode, it computes the same sum without the long per-iteration delay.
+
+Part 1 forks four child processes. The parent initially ignores the eight listed
+signals while forking:
+
+\begin{verbatim}
+SIGINT, SIGABRT, SIGILL, SIGCHLD, SIGSEGV, SIGFPE, SIGHUP, SIGTSTP
+\end{verbatim}
+
+After forking, the parent installs \texttt{SA\_SIGINFO} handlers for the same signals.
+Each child catches four signals, blocks two other signals for its whole execution,
+and ignores the rest. The two blocked signals are not caught; they keep the default
+disposition but stay blocked so they can appear in the pending queue. The handler
+prints signal number, signal name, recipient PID, parent PID, and sender PID.
+
+Example child setup from \path{outputs/problem2_part1.txt}:
+
+\begin{verbatim}
+Child index=1 pid=12 configured signal policy
+  catches: SIGSEGV SIGFPE SIGHUP SIGTSTP
+  blocked for full execution: SIGINT SIGABRT
+\end{verbatim}
+
+\section{Problem 2 Part 2 Answers}
+
+When the parent receives a signal externally, the result depends on its current
+disposition:
+
+\begin{longtable}{|p{0.14\textwidth}|p{0.25\textwidth}|p{0.27\textwidth}|p{0.22\textwidth}|}
+\hline
+\textbf{Signal} & \textbf{While parent ignores before forks} &
+\textbf{While parent catches during child run} & \textbf{After restoring defaults} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Signal} & \textbf{While parent ignores before forks} &
+\textbf{While parent catches during child run} & \textbf{After restoring defaults} \\
+\hline
+\endhead
+\texttt{SIGINT} & discarded & handler prints and parent continues & terminates parent \\
+\hline
+\texttt{SIGABRT} & discarded & handler prints and parent continues & aborts, usually core dump \\
+\hline
+\texttt{SIGILL} & discarded & handler prints and parent continues & terminates, usually core dump \\
+\hline
+\texttt{SIGCHLD} & discarded/ignored & handler prints; also happens when children exit &
+usually ignored if no unwaited child \\
+\hline
+\texttt{SIGSEGV} & discarded & handler prints and parent continues & terminates, usually core dump \\
+\hline
+\texttt{SIGFPE} & discarded & handler prints and parent continues & terminates, usually core dump \\
+\hline
+\texttt{SIGHUP} & discarded & handler prints and parent continues & terminates parent \\
+\hline
+\texttt{SIGTSTP} & discarded & handler prints and parent continues & stops parent \\
+\hline
+\end{longtable}
+
+If a signal is ignored, sending it more than once makes no visible difference. If it
+is caught and unblocked, the handler can run for each delivery. If it is blocked,
+standard signals are not queued as multiple copies; several sends normally leave one
+pending instance. If the default action terminates the process, the first
+terminating signal ends the program, so later sends do not matter.
+
+\section{Problem 2 Q2 Answers}
+
+In Q2, child 0 sends every listed signal twice to child 1 and twice to the parent.
+
+For the parent, the signals are caught, so the parent prints handler output and
+continues:
+
+\begin{verbatim}
+[handler] signal=11 (SIGSEGV), recipient pid=10, parent pid=9, sender pid=11
+[handler] signal=20 (SIGTSTP), recipient pid=10, parent pid=9, sender pid=11
+\end{verbatim}
+
+For child 1, the result depends on child 1's mask and dispositions. Child 1 catches
+\texttt{SIGSEGV}, \texttt{SIGFPE}, \texttt{SIGHUP}, and \texttt{SIGTSTP}; blocks
+\texttt{SIGINT} and \texttt{SIGABRT}; and ignores the other listed signals. The
+pending queue before it exited showed:
+
+\begin{verbatim}
+Q2 receiver child before exit pid=12 pending: SIGINT SIGABRT
+\end{verbatim}
+
+Even though each was sent twice, only one pending \texttt{SIGINT} and one pending
+\texttt{SIGABRT} appeared. That is because these are standard signals, not real-time
+signals, so repeated blocked deliveries coalesce.
+
+\section{Problem 2 Q3 Answers}
+
+The Q3 code includes the eight assignment signals plus \texttt{SIGQUIT}, because Q3
+adds \texttt{SIGQUIT} to the masking experiment. The Linux/POSIX call is named
+\texttt{sigtimedwait}, even though the assignment text says \texttt{sigtimewaitinfo}.
+
+The parent blocks \texttt{SIGINT}, \texttt{SIGQUIT}, and \texttt{SIGTSTP} before
+forking. It sends itself all Q3 signals three times before forking. The parent
+pending queue before fork was:
+
+\begin{verbatim}
+Q3 parent pending before fork pid=10 pending: SIGINT SIGQUIT SIGTSTP
+\end{verbatim}
+
+The non-blocked signals were handled immediately. The blocked signals were pending.
+Multiple sends of the same standard signal still produced one pending signal.
+
+The children inherited the parent's handlers after fork. They did not inherit the
+parent's pending queue. After the parent sent signals to every child, the first half
+of children blocked the same three-signal set and showed the same pending queue:
+
+\begin{verbatim}
+Q3 child pending before sigwait calls pid=11 pending: SIGINT SIGQUIT SIGTSTP
+Q3 child pending before sigwait calls pid=12 pending: SIGINT SIGQUIT SIGTSTP
+\end{verbatim}
+
+The other half blocked the remaining six signals and showed:
+
+\begin{verbatim}
+Q3 child pending before sigwait calls pid=13 pending:
+  SIGABRT SIGILL SIGCHLD SIGSEGV SIGFPE SIGHUP
+Q3 child pending before sigwait calls pid=14 pending:
+  SIGABRT SIGILL SIGCHLD SIGSEGV SIGFPE SIGHUP
+\end{verbatim}
+
+Then \texttt{sigwait}, \texttt{sigwaitinfo}, and \texttt{sigtimedwait} consumed
+pending signals from the blocked sets. For example:
+
+\begin{verbatim}
+Q3 parent sigwait consumed 2 (SIGINT) in pid=10
+Q3 parent sigwaitinfo consumed 3 (SIGQUIT) in pid=10 from sender=10
+Q3 child sigwait consumed 4 (SIGILL) in pid=13
+Q3 child sigwaitinfo consumed 8 (SIGFPE) in pid=13 from sender=10
+\end{verbatim}
+
+Processes that block the same signals have the same type of pending queue after
+receiving the same signals. The child queues are not copies of the parent's queue
+from before fork; they are built from signals sent directly to those child PIDs
+after fork. Non-blocked signals run the inherited handlers immediately.
+
+\section{How To Compile And Run}
+
+\begin{verbatim}
+make clean
+make
+make run-problem1
+make run-problem1-exp1
+make run-problem1-exp2
+make run-problem2-part1
+make run-problem2-q2
+make run-problem2-q3
+\end{verbatim}
+
+Generated output files:
+
+\begin{verbatim}
+outputs/problem1_exp1.txt
+outputs/problem1_exp2.txt
+outputs/problem1_default.txt
+outputs/problem2_part1.txt
+outputs/problem2_q2.txt
+outputs/problem2_q3.txt
+\end{verbatim}
+
+\section{Known Limitations}
+
+The run targets use fast mode so grading/test output completes quickly. Running
+without \texttt{fast} gives the longer sleeps required by the assignment.
+
+The \texttt{SIGTSTP} behavior is affected by whether the program is run as an
+interactive job. In this redirected Makefile environment, I added \texttt{SIGSTOP}
+after the required \texttt{raise(SIGTSTP)} so the stopped-child behavior is still
+observable.
+
+Because several processes write to the same output file, some ordinary progress
+lines may interleave. The important signal, pending queue, and wait-status lines are
+printed clearly enough to support the observations above.
+
+\end{document}

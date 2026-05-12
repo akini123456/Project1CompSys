@@ -1,0 +1,8 @@
+*.o
+*.aux
+*.log
+*.out
+
+project1
+problem1_signals
+problem2_signals

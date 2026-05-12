@@ -182,7 +182,11 @@ Result process_segment(int *arr, Task task, int *proc_counter, FILE *out) {
 
             child_res.bytes_sent += sizeof(Result);
 
-            write(pipes[i][1], &child_res, sizeof(Result));
+            if (write(pipes[i][1], &child_res, sizeof(Result)) == -1) {
+                perror("write");
+                close(pipes[i][1]);
+                exit(1);
+            }
             close(pipes[i][1]);
 
             sleep(1);
@@ -321,7 +325,9 @@ int main(int argc, char *argv[]) {
     fprintf(out, "Starting Project 1 with L=%d, H=%d, PN=%d, branch=%d\n", L, H, PN, branch);
     fflush(out);
 
-    system("pstree -p");
+    if (system("pstree -p") == -1) {
+        perror("system pstree");
+    }
 
     Task root;
     root.start = 0;
